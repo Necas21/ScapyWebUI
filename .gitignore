@@ -24,4 +24,4 @@ pip-log.txt
 
 venv
 logs/
-.idea
+.idea/
