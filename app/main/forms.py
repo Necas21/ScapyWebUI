@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired
 
 
 class InputForm(FlaskForm):
-    url = StringField("URL", validators=[DataRequired()])
+    domain = StringField("Domain", validators=[DataRequired()])
     submit = SubmitField("Submit")

@@ -1,1 +1,43 @@
-<h1>Welcome to Scapy Web UI!</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-5 text-center bg-body-tertiary rounded-3">
+    <h1>Welcome to Scapy Web UI!</h1>
+
+    <form action="{{ url_for('main.index') }}" method="post" autocomplete="off" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.domain.label(class="form-label") }}
+            <br>
+            {{ form.domain(class="form-control", placeholder="Enter a domain name e.g. google.com") }}
+            <br>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    <br>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, r in res %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td><a href="https://whatismyipaddress.com/ip/{{ r.answer.src }}">{{ r.answer.src }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    {% if form.domain %}
+        <img src="{{ url_for('static', filename='traceroute.svg') }}">
+    {% endif %}
+</div>
+
+
+{% endblock %}
